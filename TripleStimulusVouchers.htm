@@ -1,0 +1,57 @@
+<!DOCTYPE html>  
+ <html>  
+      <head>  
+           <meta charset="utf-8" />
+           <title>全台振興券資訊</title>  
+           <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>  
+           <script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script> 
+           <link href="TripleStimulusVouchers.css" rel="stylesheet" type="text/css">
+        </head>  
+        <body>  
+           <div class="container">
+               <div class="title">
+                <h1>全台振興券資訊表格彙整(待改良)</h1>
+                <h3>資料來源:政府資料開放平臺_(更新請按F5重新整理【請不要一直重整，API會call爆】、搜尋請用ctrl+f)</h3><br/>  
+            </div>  
+                <table id="main_table" class="table table-bordered">  
+                     <thead>  
+                          <tr>  
+                            <th>縣市</th>
+                            <th>鄉鎮區</th>
+                            <th>分局</th>
+                            <th>服務量</th>
+                            <th>營業時間</th>
+                            <th>營業備註</th>
+                            <th>門市地址</th>
+                            <th>郵遞區號</th>
+                            <th>異動時間</th>
+                            <th>電話</th>  
+                          </tr>  
+                     </thead>  
+                </table>  
+           </div>
+<script>
+    $(document).ready(function(){
+     
+       $.getJSON("https://3000.gov.tw/hpgapi-openmap/api/getPostData", function(data){
+            var TripleStimulusVouchers_data = '';
+              $.each(data, function(key, value){
+               TripleStimulusVouchers_data +='<tr>';
+               TripleStimulusVouchers_data +='<td>'+value.hsnNm+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.townNm+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.storeNm+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.total+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.busiTime+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.busiMemo+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.addr+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.zipCd+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.updateTime+'</td>';
+               TripleStimulusVouchers_data +='<td>'+value.tel+'</td>';
+               TripleStimulusVouchers_data += '</tr>';
+            });
+        $('#main_table').append(TripleStimulusVouchers_data);
+     })
+});   
+</script>
+</body>  
+ </html>  

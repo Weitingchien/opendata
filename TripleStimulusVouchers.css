@@ -1,0 +1,18 @@
+.body{
+    width: 100%;
+
+}
+.title01{
+    text-align: right;
+    margin: 0 auto;
+    background-color: antiquewhite;
+}
+
+.table{
+    width: 100%;
+}
+
+.table td{
+    justify-content: center;
+    width: 50px;
+}
